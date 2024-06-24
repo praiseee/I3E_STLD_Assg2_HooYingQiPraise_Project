@@ -25,4 +25,5 @@ public class DamageGun : MonoBehaviour
                 enemy.Health -= Damage;
             }
         }
+    }
 }
