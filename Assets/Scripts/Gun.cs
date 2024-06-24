@@ -7,29 +7,32 @@ using UnityEngine.Rendering;
 public class Gun : MonoBehaviour
 {
     /// <summary>
-    /// This variable allow us to connect other variables to create custom gun behavior
+    /// This variable allows us to connect other variables to create custom gun behavior
     /// </summary>
     public UnityEvent OnGunShoot;
 
     /// <summary>
-    /// Number of seconds acting as as a buffer between firing
+    /// Number of seconds acting as a buffer between firing
     /// </summary>
     public float FireCoolDown;
 
     /// <summary>
-    /// Determine it is a semi gun
+    /// Determine if it is an automatic gun
     /// </summary>
     public bool Automatic;
 
     /// <summary>
-    /// Store current cooldown of weapon
+    /// Store current cooldown of the weapon
     /// </summary>
     private float CurrentCooldown;
+
+    private DamageGun damageGun;
 
     // Start is called before the first frame update
     void Start()
     {
         CurrentCooldown = FireCoolDown;
+        damageGun = GetComponent<DamageGun>();
     }
 
     // Update is called once per frame
@@ -39,18 +42,17 @@ public class Gun : MonoBehaviour
         {
             if (Input.GetMouseButton(0))
             {
-               if (CurrentCooldown <= 0f)
+                if (CurrentCooldown <= 0f)
                 {
                     OnGunShoot?.Invoke();
                     CurrentCooldown = FireCoolDown;
                 }
             }
         }
-
         else
         {
-            if (Input.GetMouseButton(0))
-            { 
+            if (Input.GetMouseButtonDown(0))
+            {
                 if (CurrentCooldown <= 0f)
                 {
                     OnGunShoot?.Invoke();
@@ -59,5 +61,11 @@ public class Gun : MonoBehaviour
             }
         }
         CurrentCooldown -= Time.deltaTime;
+    }
+
+    public void OnShoot()
+    {
+        damageGun.Shoot();
+
     }
 }

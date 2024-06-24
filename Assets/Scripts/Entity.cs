@@ -15,6 +15,7 @@ public class Entity : MonoBehaviour
         {
             return health;
         }
+
         set
         {
             health = value;
