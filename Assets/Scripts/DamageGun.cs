@@ -9,7 +9,7 @@ public class DamageGun : MonoBehaviour
     private Transform PlayerCamera;
 
     // Start is called before the first frame update
-    public void Start()
+    void Start()
     {
         PlayerCamera = Camera.main.transform;
     }
@@ -20,9 +20,10 @@ public class DamageGun : MonoBehaviour
         Ray gunRay = new Ray(PlayerCamera.position, PlayerCamera.forward);
         if (Physics.Raycast(gunRay, out RaycastHit hitInfo, BulletRange))
         {
-            if (hitInfo.collider.gameObject.TryGetComponent(out Entity enemy))
+            Entity enemy = hitInfo.collider.gameObject.GetComponent<Entity>();
+            if (enemy != null)
             {
-                enemy.Health -= Damage;
+                enemy.CurrentHealth -= Damage;
             }
         }
     }

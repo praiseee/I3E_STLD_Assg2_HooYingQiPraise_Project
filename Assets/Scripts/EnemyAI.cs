@@ -23,7 +23,6 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     public float timeBetweenAttacks;
     bool alreadyAttacked;
-    public GameObject projectile;
 
     /// <summary>
     /// States
@@ -48,7 +47,6 @@ public class EnemyAI : MonoBehaviour
 
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (!playerInAttackRange && !playerInSightRange) AttackPlayer();
     }
 
     private void Patroling()
@@ -65,7 +63,6 @@ public class EnemyAI : MonoBehaviour
         /// </summary>
         if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false;
-
     }
 
     private void SearchWalkPoint()
@@ -76,7 +73,7 @@ public class EnemyAI : MonoBehaviour
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-        walkPoint = new Vector3 (transform.position.x + randomX, transform.position.y, transform.position.z +randomZ);
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
             walkPointSet = true;
@@ -86,29 +83,4 @@ public class EnemyAI : MonoBehaviour
     {
         agent.SetDestination(player.position);
     }
-
-    private void AttackPlayer()
-    {
-        /// <summary>
-        /// Make sure enemy does not move
-        /// </summary>
-        agent.SetDestination(transform.position);
-        transform.LookAt(player);
-
-        if (!alreadyAttacked)
-        {
-            /// <summary>
-            /// Attack Code starts here
-            /// </summary>
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
-        }    
-    }
-
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
-    }
 }
-

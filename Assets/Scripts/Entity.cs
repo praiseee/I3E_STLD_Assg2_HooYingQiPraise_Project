@@ -1,42 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class Entity : MonoBehaviour
 {
+    [SerializeField] private float startingHealth = 100f;
+    private float currentHealth;
 
-    [SerializeField]
-    private float StartingHealth;
-    private float health;
-    public float Health
+    public float CurrentHealth
     {
-        get
-        {
-            return health;
-        }
-
+        get { return currentHealth; }
         set
         {
-            health = value;
-            Debug.Log(health);
+            currentHealth = value;
+            UpdateHealthBar();
+            Debug.Log("Current Health: " + currentHealth); // Log the current health
 
-            if (health <= 0f)
+            if (currentHealth <= 0f)
             {
                 Destroy(gameObject);
             }
         }
     }
 
-    // Start is called before the first frame update
+    public Slider healthBarPrefab;
+    private Slider healthBarInstance;
+
+    private bool healthBarCreated = false; // Flag to track if health bar is already created
+
     void Start()
     {
-        Health = StartingHealth;
+        CurrentHealth = startingHealth;
+        if (!healthBarCreated)
+        {
+            CreateHealthBar(); // Create health bar only if it's not already created
+            healthBarCreated = true;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void UpdateHealthBar()
     {
-        
+        if (healthBarInstance != null)
+        {
+            healthBarInstance.value = currentHealth / startingHealth;
+        }
+    }
+
+    void CreateHealthBar()
+    {
+        healthBarInstance = Instantiate(healthBarPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
+        healthBarInstance.transform.SetParent(GameObject.Find("Canvas").transform); // Set parent to Canvas
+        healthBarInstance.transform.localScale = Vector3.one; // Reset scale
     }
 }
