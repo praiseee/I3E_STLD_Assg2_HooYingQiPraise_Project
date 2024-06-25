@@ -38,30 +38,15 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Automatic)
+        if (Input.GetMouseButton(0) && CurrentCooldown <= 0f)
         {
-            if (Input.GetMouseButton(0))
-            {
-                if (CurrentCooldown <= 0f)
-                {
-                    OnGunShoot?.Invoke();
-                    CurrentCooldown = FireCoolDown;
-                }
-            }
+            OnGunShoot?.Invoke();
+            CurrentCooldown = FireCoolDown;
         }
-        else
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (CurrentCooldown <= 0f)
-                {
-                    OnGunShoot?.Invoke();
-                    CurrentCooldown = FireCoolDown;
-                }
-            }
-        }
+
         CurrentCooldown -= Time.deltaTime;
     }
+
 
     public void OnShoot()
     {

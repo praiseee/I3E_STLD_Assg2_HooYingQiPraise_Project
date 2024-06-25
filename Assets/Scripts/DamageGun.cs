@@ -13,24 +13,30 @@ public class DamageGun : MonoBehaviour
         PlayerCamera = Camera.main.transform;
     }
 
+    /// <summary>
+    /// Checks for player input to fire the weapon
+    /// </summary>
     void Update()
     {
-        if (Input.GetButtonDown("Fire1")) // Assuming left mouse button or a similar input
+        if (Input.GetButtonDown("Fire1"))
         {
             Shoot();
         }
     }
 
+    /// <summary>
+    /// Casts a ray from the player's camera forward direction (PlayerCamera.forward) to simulate shooting.
+    /// </summary>
     public void Shoot()
     {
-        Ray gunRay = new Ray(PlayerCamera.position, PlayerCamera.forward);
-        if (Physics.Raycast(gunRay, out RaycastHit hitInfo, BulletRange))
+        Ray gunRay = new Ray(PlayerCamera.position, PlayerCamera.forward); //creates a new ray named gunRay, ray starts from the position of the PlayerCamera
+        if (Physics.Raycast(gunRay, out RaycastHit hitInfo, BulletRange)) //checks if the ray hits any collider within a maximum distance of BulletRange.
         {
-            Entity enemy = hitInfo.collider.gameObject.GetComponent<Entity>();
+            Entity enemy = hitInfo.collider.gameObject.GetComponent<Entity>(); //GameObject that was hit by the raycast 
             if (enemy != null)
             {
-                enemy.CurrentHealth -= Damage;
-                Debug.Log("Shot entity, new health: " + enemy.CurrentHealth);
+                enemy.CurrentHealth -= Damage; //hit GameObject, this line reduces its CurrentHealth
+                Debug.Log("Shot entity, new health: " + enemy.CurrentHealth); //check that an enemy was shot
             }
         }
     }

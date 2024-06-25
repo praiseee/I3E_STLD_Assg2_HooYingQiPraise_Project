@@ -14,14 +14,18 @@ public class Entity : MonoBehaviour
 
     public float CurrentHealth
     {
+        /// <summary>
+        /// To retrieve the value of the currentHealth
+        /// </summary>
         get
         {
             return currentHealth;
         }
+
         set
         {
             currentHealth = value;
-            UpdateHealthBar();
+            UpdateHealthBar(); // Update the health bar UI to reflect the new health value.
             Debug.Log("Current Health: " + currentHealth); // Current health
 
             if (currentHealth <= 0f)
@@ -31,12 +35,18 @@ public class Entity : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the current health of the entity to the starting health value
+    /// </summary>
     void Start()
     {
         currentHealth = startingHealth;
         CreateHealthBar();
     }
 
+    /// <summary>
+    /// Verifies if the health bar instance exists
+    /// </summary>
     void UpdateHealthBar()
     {
         if (healthBarInstance != null)
@@ -50,6 +60,9 @@ public class Entity : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Verifies if the health bar prefab is assigned.
+    /// </summary>
     void CreateHealthBar()
     {
         if (healthBarPrefab != null)
