@@ -8,13 +8,19 @@ public class DamageGun : MonoBehaviour
     public float BulletRange;
     private Transform PlayerCamera;
 
-    // Start is called before the first frame update
     void Start()
     {
         PlayerCamera = Camera.main.transform;
     }
 
-    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetButtonDown("Fire1")) // Assuming left mouse button or a similar input
+        {
+            Shoot();
+        }
+    }
+
     public void Shoot()
     {
         Ray gunRay = new Ray(PlayerCamera.position, PlayerCamera.forward);
@@ -24,6 +30,7 @@ public class DamageGun : MonoBehaviour
             if (enemy != null)
             {
                 enemy.CurrentHealth -= Damage;
+                Debug.Log("Shot entity, new health: " + enemy.CurrentHealth);
             }
         }
     }

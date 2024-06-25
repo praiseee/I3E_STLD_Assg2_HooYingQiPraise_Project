@@ -9,6 +9,10 @@ public class EnemyAI : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform player;
+
+    /// <summary>
+    /// LayerMask to only interact with objects on these layers.
+    /// </summary>
     public LayerMask whatIsGround, whatIsPlayer;
 
     /// <summary>
@@ -30,10 +34,13 @@ public class EnemyAI : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    /// <summary>
+    /// Called when the script instance is being loaded
+    /// </summary>
     public void Awake()
     {
-        player = GameObject.Find("PlayerCapsule").transform;
-        agent = GetComponent<NavMeshAgent>();
+        player = GameObject.Find("PlayerCapsule").transform; ///Finds a GameObject named "PlayerCapsule" in the scene.
+        agent = GetComponent<NavMeshAgent>(); ///Responsible for pathfinding and navigation in Unity using the NavMesh system.
     }
 
     // Update is called once per frame
@@ -49,6 +56,9 @@ public class EnemyAI : MonoBehaviour
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
     }
 
+    /// <summary>
+    /// Move AI character to random points
+    /// </summary>
     private void Patroling()
     {
         if (!walkPointSet) SearchWalkPoint();
@@ -72,6 +82,10 @@ public class EnemyAI : MonoBehaviour
         /// </summary>
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
+
+        /// <summary>
+        /// To verify if the randomly generated walkPoint is on the ground
+        /// </summary>
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 

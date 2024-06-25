@@ -5,17 +5,24 @@ using UnityEngine.UI;
 
 public class Entity : MonoBehaviour
 {
-    [SerializeField] private float startingHealth = 100f;
+    [SerializeField]
+    private float startingHealth = 100f;
     private float currentHealth;
+
+    public Slider healthBarPrefab;
+    private Slider healthBarInstance;
 
     public float CurrentHealth
     {
-        get { return currentHealth; }
+        get
+        {
+            return currentHealth;
+        }
         set
         {
             currentHealth = value;
             UpdateHealthBar();
-            Debug.Log("Current Health: " + currentHealth); // Log the current health
+            Debug.Log("Current Health: " + currentHealth); // Current health
 
             if (currentHealth <= 0f)
             {
@@ -24,19 +31,10 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public Slider healthBarPrefab;
-    private Slider healthBarInstance;
-
-    private bool healthBarCreated = false; // Flag to track if health bar is already created
-
     void Start()
     {
-        CurrentHealth = startingHealth;
-        if (!healthBarCreated)
-        {
-            CreateHealthBar(); // Create health bar only if it's not already created
-            healthBarCreated = true;
-        }
+        currentHealth = startingHealth;
+        CreateHealthBar();
     }
 
     void UpdateHealthBar()
@@ -44,13 +42,25 @@ public class Entity : MonoBehaviour
         if (healthBarInstance != null)
         {
             healthBarInstance.value = currentHealth / startingHealth;
+            Debug.Log("Health Bar Value: " + healthBarInstance.value); // Slider value
+        }
+        else
+        {
+            Debug.LogError("Health bar instance is null!");
         }
     }
 
     void CreateHealthBar()
     {
-        healthBarInstance = Instantiate(healthBarPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
-        healthBarInstance.transform.SetParent(GameObject.Find("Canvas").transform); // Set parent to Canvas
-        healthBarInstance.transform.localScale = Vector3.one; // Reset scale
+        if (healthBarPrefab != null)
+        {
+            healthBarInstance = Instantiate(healthBarPrefab, transform.position + Vector3.up * 2f, Quaternion.identity);
+            healthBarInstance.transform.SetParent(GameObject.Find("Canvas").transform, false); 
+            healthBarInstance.transform.localScale = Vector3.one;
+        }
+        else
+        {
+            Debug.LogError("Health bar prefab is not assigned!");
+        }
     }
 }
