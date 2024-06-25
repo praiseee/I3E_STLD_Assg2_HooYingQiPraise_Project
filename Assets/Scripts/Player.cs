@@ -1,3 +1,9 @@
+/*
+ * Author: Hoo Ying Qi Praise
+ * Date: 23/06/2024
+ * Description: Player Interaction Script
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

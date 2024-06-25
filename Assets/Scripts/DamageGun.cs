@@ -1,3 +1,9 @@
+/*
+ * Author: Hoo Ying Qi Praise
+ * Date: 23/06/2024
+ * Description: Damage for Modular Weapon System
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

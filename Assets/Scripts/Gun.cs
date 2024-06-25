@@ -1,3 +1,9 @@
+/*
+ * Author: Hoo Ying Qi Praise
+ * Date: 23/06/2024
+ * Description: Modular Weapon System
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +34,9 @@ public class Gun : MonoBehaviour
 
     private DamageGun damageGun;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// checks if the left mouse button is currently being held down. Checks if the current cooldown of the weapon is less than or equal to zero.
+    /// </summary>
     void Start()
     {
         CurrentCooldown = FireCoolDown;
@@ -40,11 +48,11 @@ public class Gun : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && CurrentCooldown <= 0f)
         {
-            OnGunShoot?.Invoke();
-            CurrentCooldown = FireCoolDown;
+            OnGunShoot?.Invoke(); //syntax is used to safely invoke the event without throwing a null reference exception if it is not subscribed to.
+            CurrentCooldown = FireCoolDown; // resets the CurrentCooldown to the value of FireCoolDown
         }
 
-        CurrentCooldown -= Time.deltaTime;
+        CurrentCooldown -= Time.deltaTime; //the cooldown is decremented by the time that has passed since the last frame 
     }
 
 
