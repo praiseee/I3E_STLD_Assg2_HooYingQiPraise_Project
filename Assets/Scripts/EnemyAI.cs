@@ -1,7 +1,7 @@
 /*
  * Author: Hoo Ying Qi Praise
  * Date: 23/06/2024
- * Description: Enemy AI Interation with Player
+ * Description: Enemy AI Parol and chase
  */
 
 using System.Collections;

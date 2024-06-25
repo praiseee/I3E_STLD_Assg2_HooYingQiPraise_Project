@@ -38,11 +38,11 @@ public class DamageGun : MonoBehaviour
         Ray gunRay = new Ray(PlayerCamera.position, PlayerCamera.forward); //creates a new ray named gunRay, ray starts from the position of the PlayerCamera
         if (Physics.Raycast(gunRay, out RaycastHit hitInfo, BulletRange)) //checks if the ray hits any collider within a maximum distance of BulletRange.
         {
-            Entity enemy = hitInfo.collider.gameObject.GetComponent<Entity>(); //GameObject that was hit by the raycast 
+            Enemy enemy = hitInfo.collider.gameObject.GetComponent<Enemy>(); //GameObject that was hit by the raycast 
             if (enemy != null)
             {
-                enemy.CurrentHealth -= Damage; //hit GameObject, this line reduces its CurrentHealth
-                Debug.Log("Shot entity, new health: " + enemy.CurrentHealth); //check that an enemy was shot
+                enemy.Damage(5); //hit GameObject, this line reduces its CurrentHealth
+                Debug.Log("Shot entity, new health: "); //check that an enemy was shot
             }
         }
     }

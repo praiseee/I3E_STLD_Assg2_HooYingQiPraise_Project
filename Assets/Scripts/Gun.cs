@@ -23,11 +23,6 @@ public class Gun : MonoBehaviour
     public float FireCoolDown;
 
     /// <summary>
-    /// Determine if it is an automatic gun
-    /// </summary>
-    public bool Automatic;
-
-    /// <summary>
     /// Store current cooldown of the weapon
     /// </summary>
     private float CurrentCooldown;
