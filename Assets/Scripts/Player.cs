@@ -4,6 +4,7 @@
  * Description: Player script handling health, damage, and medkits
  */
 
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -12,6 +13,7 @@ public class Player : MonoBehaviour
     public int currentHealth;
     public HealthBar playerHealthBar;
     private int medkitCount = 0;
+    public TMP_Text medkitText; // TextMeshPro text component for medkit count
 
     /// <summary>
     /// Ensures the player starts with full health.
@@ -21,6 +23,7 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         playerHealthBar.SetMaxHealth(maxHealth);
         playerHealthBar.SetHealth(currentHealth);
+        UpdateMedkitCountDisplay(); // Update the initial medkit count display
     }
 
     /// <summary>
@@ -56,6 +59,7 @@ public class Player : MonoBehaviour
 
             // Decrement Medkit count when used
             medkitCount--;
+            UpdateMedkitCountDisplay(); // Update the medkit count display after using a medkit
             Debug.Log("Used a medkit. Remaining medkits: " + medkitCount);
         }
         else
@@ -70,6 +74,7 @@ public class Player : MonoBehaviour
     public void AddMedkit()
     {
         medkitCount++;
+        UpdateMedkitCountDisplay(); // Update the medkit count display after picking up a medkit
         Debug.Log("Medkit picked up. Total medkits: " + medkitCount);
     }
 
@@ -121,5 +126,13 @@ public class Player : MonoBehaviour
     void Die()
     {
         GameManager.Instance.GameOver();
+    }
+
+    /// <summary>
+    /// Updates the medkit count display using TextMeshPro.
+    /// </summary>
+    void UpdateMedkitCountDisplay()
+    {
+        medkitText.text = "Medkits: " + medkitCount.ToString();
     }
 }

@@ -9,7 +9,7 @@ using UnityEngine;
 public class Medkit : MonoBehaviour
 {
     /// <summary>
-    ///  tracks whether the player is within the trigger area of the medkit.
+    /// Tracks whether the player is within the trigger area of the medkit.
     /// </summary>
     private bool isInRange = false;
 
@@ -38,7 +38,7 @@ public class Medkit : MonoBehaviour
     }
 
     /// <summary>
-    /// If collision is occurs and player detacted, medkit is incremented as "pick up"
+    /// If collision occurs and player is detected, medkit is picked up
     /// </summary>
     void Update()
     {

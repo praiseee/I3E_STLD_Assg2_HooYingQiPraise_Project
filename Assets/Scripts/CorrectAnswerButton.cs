@@ -9,16 +9,15 @@ using TMPro;
 
 public class CorrectAnswerButton : MonoBehaviour
 {
-    public TMP_Text correctText; // Reference to the TextMeshPro text for correct message
+    public TMP_Text correctText;
 
+    /// <summary>
+    /// Display the correct message. Hide the message after 5 seconds
+    /// </summary>
     public void OnButtonPress()
     {
-        // Display the correct message
         correctText.gameObject.SetActive(true);
-        Invoke("HideCorrectMessage", 1f); // Hide the message after 5 seconds
-
-        // Optionally, you can add more functionality here for correct answer handling
-        // For example, awarding points, progressing to the next question, etc.
+        Invoke("HideCorrectMessage", 1f); 
     }
 
     void HideCorrectMessage()
