@@ -8,6 +8,10 @@ using UnityEngine;
 
 public class Medkit : MonoBehaviour
 {
+    /// <summary>
+    ///  tracks whether the player is within the trigger area of the medkit.
+    /// </summary>
+    /// 
     private bool isInRange = false;
 
     void Update()

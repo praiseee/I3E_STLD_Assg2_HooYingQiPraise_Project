@@ -10,8 +10,8 @@ using TMPro;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider; // Reference to the slider component
-    public TMP_Text healthText; // Reference to the TextMeshPro text component
+    public Slider slider; //Slider component
+    public TMP_Text healthText; //TextMeshPro text component
 
     /// <summary>
     /// Updates the current health value displayed on the slider and text.

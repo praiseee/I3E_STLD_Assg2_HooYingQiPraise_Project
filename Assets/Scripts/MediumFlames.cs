@@ -8,13 +8,18 @@ using UnityEngine;
 
 public class MediumFlames : MonoBehaviour
 {
+    /// <summary>
+    ///  Implement a hazard in that damages the player character upon collision.
+    /// </summary>
+    /// <param name="other"></param>
+    /// 
     private void OnTriggerEnter(Collider other)
     {
         // Check if the object entering the trigger is the player
         Player player = other.GetComponent<Player>();
         if (player != null)
         {
-            // Reduce player's health
+            // Reduce player's health using dunction
             player.TakeDamage(4);
         }
     }
