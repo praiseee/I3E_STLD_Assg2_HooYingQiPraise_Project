@@ -11,12 +11,12 @@ public class Player : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
 
-    public HealthBar playerHealthBar;  // Ensure this is of type HealthBar
+    public HealthBar playerHealthBar;  
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        playerHealthBar.SetHealth(currentHealth);
+        playerHealthBar.SetHealth(currentHealth); //Update the health value displayed on the health bar.
 
         if (currentHealth <= 0)
         {
@@ -28,8 +28,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
-        playerHealthBar.SetMaxHealth(maxHealth);
+        currentHealth = maxHealth; //Initializing the player's health to the maximum possible value at the start of the game.
+        playerHealthBar.SetMaxHealth(maxHealth); 
     }
 
     void Update()

@@ -4,8 +4,6 @@
  * Description: Damage for Modular Weapon System
  */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DamageGun : MonoBehaviour
