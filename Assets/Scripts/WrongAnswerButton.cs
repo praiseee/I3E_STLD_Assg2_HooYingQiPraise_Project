@@ -10,15 +10,14 @@ using UnityEngine;
 
 public class WrongAnswerButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int damageAmount = 5;
 
-    // Update is called once per frame
-    void Update()
+    public void OnInteract()
     {
-        
+        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        if (player != null)
+        {
+            player.TakeDamage(damageAmount);
+        }
     }
 }
