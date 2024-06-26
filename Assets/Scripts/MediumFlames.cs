@@ -19,7 +19,7 @@ public class MediumFlames : MonoBehaviour
         Player player = other.GetComponent<Player>();
         if (player != null)
         {
-            // Reduce player's health using dunction
+            // Reduce player's health using function
             player.TakeDamage(4);
         }
     }

@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
     {
         if (medkitCount > 0)
         {
-            // Increase health but not above maxHealth. machealthh as 2nd argument to not exceed 100.
+            // Increase health but not above maxHealth. Maxhealthh as 2nd argument to not exceed 100.
             currentHealth = Mathf.Min(currentHealth + 5, maxHealth);
 
             // Update current health display

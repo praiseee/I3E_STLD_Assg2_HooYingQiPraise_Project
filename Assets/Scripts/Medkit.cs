@@ -11,9 +11,35 @@ public class Medkit : MonoBehaviour
     /// <summary>
     ///  tracks whether the player is within the trigger area of the medkit.
     /// </summary>
-    /// 
     private bool isInRange = false;
 
+    /// <summary>
+    /// To detect when the player enters trigger zone
+    /// </summary>
+    /// <param name="other"></param>
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isInRange = true;
+        }
+    }
+
+    /// <summary>
+    /// To detect when the player exits trigger zone
+    /// </summary>
+    /// <param name="other"></param>
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isInRange = false;
+        }
+    }
+
+    /// <summary>
+    /// If collision is occurs and player detacted, medkit is incremented as "pick up"
+    /// </summary>
     void Update()
     {
         if (isInRange && Input.GetButtonDown("Use"))
@@ -24,22 +50,6 @@ public class Medkit : MonoBehaviour
                 player.AddMedkit();
                 Destroy(gameObject);
             }
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isInRange = true;
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isInRange = false;
         }
     }
 }
