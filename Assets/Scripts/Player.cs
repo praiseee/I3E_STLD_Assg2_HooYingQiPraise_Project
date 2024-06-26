@@ -1,12 +1,10 @@
 /*
  * Author: Hoo Ying Qi Praise
  * Date: 23/06/2024
- * Description: HealthBar
+ * Description: Player script handling health and damage
  */
 
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 public class Player : MonoBehaviour
 {
     public int maxHealth = 100;
@@ -16,14 +14,14 @@ public class Player : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        playerHealthBar.SetMaxHealth(maxHealth);
-        playerHealthBar.SetHealth(currentHealth);
+        playerHealthBar.SetMaxHealth(maxHealth); // Initialize max health
+        playerHealthBar.SetHealth(currentHealth); // Initialize current health display
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        playerHealthBar.SetHealth(currentHealth);
+        playerHealthBar.SetHealth(currentHealth); // Update current health display
 
         if (currentHealth <= 0)
         {
@@ -44,6 +42,3 @@ public class Player : MonoBehaviour
         }
     }
 }
-
-
-
