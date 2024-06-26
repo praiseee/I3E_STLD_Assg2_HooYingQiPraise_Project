@@ -31,10 +31,4 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth; //Initializing the player's health to the maximum possible value at the start of the game.
         enemyHealthBar.SetMaxHealth(maxHealth);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

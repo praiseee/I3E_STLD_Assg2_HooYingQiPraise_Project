@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        GameManager.Instance.GameOver(); // Assuming GameManager is a singleton managing game state
+        GameManager.Instance.GameOver();
     }
 
     void Update()
