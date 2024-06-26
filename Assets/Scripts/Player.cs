@@ -1,11 +1,9 @@
 /*
  * Author: Hoo Ying Qi Praise
  * Date: 23/06/2024
- * Description: Player health management
+ * Description: HealthBar
  */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -13,16 +11,15 @@ public class Player : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
 
-    public HealthBar healthBar;
+    public HealthBar playerHealthBar;  // Ensure this is of type HealthBar
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        playerHealthBar.SetHealth(currentHealth);
 
         if (currentHealth <= 0)
         {
-            // Handle player death (e.g., respawn, game over)
             Debug.Log("Player has died");
         }
         Debug.Log("Player health:" + currentHealth);
@@ -32,17 +29,14 @@ public class Player : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        playerHealthBar.SetMaxHealth(maxHealth);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Dmage for testing
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(10);
         }
     }
 }
-
