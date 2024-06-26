@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     public void Damage(int damage)
     {
         currentHealth -= damage;
-        enemyHealthBar.SetHealth(currentHealth);
+        enemyHealthBar.SetHealth(currentHealth); //Update the health value displayed on the health bar.
 
         if (currentHealth <= 0)
         {
@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = maxHealth; //Initializing the player's health to the maximum possible value at the start of the game.
         enemyHealthBar.SetMaxHealth(maxHealth);
     }
 

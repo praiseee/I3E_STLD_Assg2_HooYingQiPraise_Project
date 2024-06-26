@@ -5,31 +5,35 @@
  */
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
+    public HealthBar playerHealthBar;
 
-    public HealthBar playerHealthBar;  
+    void Start()
+    {
+        currentHealth = maxHealth;
+        playerHealthBar.SetMaxHealth(maxHealth);
+        playerHealthBar.SetHealth(currentHealth);
+    }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        playerHealthBar.SetHealth(currentHealth); //Update the health value displayed on the health bar.
+        playerHealthBar.SetHealth(currentHealth);
 
         if (currentHealth <= 0)
         {
-            Debug.Log("Player has died");
+            Die();
         }
-        Debug.Log("Player health:" + currentHealth);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void Die()
     {
-        currentHealth = maxHealth; //Initializing the player's health to the maximum possible value at the start of the game.
-        playerHealthBar.SetMaxHealth(maxHealth); 
+        GameManager.Instance.GameOver(); // Assuming GameManager is a singleton managing game state
     }
 
     void Update()
@@ -40,3 +44,6 @@ public class Player : MonoBehaviour
         }
     }
 }
+
+
+
