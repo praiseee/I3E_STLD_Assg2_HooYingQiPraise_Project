@@ -11,7 +11,7 @@ public class WrongAnswerButton : MonoBehaviour
     public Player player; // Reference to the Player script for health management
     public int damageAmount = 5; // Amount of damage to inflict on the player for a wrong answer
 
-    public void OnInteract()
+    public void OnButtonPress()
     {
         // Inflict damage to the player for a wrong answer
         player.TakeDamage(damageAmount);

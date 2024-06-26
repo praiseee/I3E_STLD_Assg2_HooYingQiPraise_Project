@@ -11,11 +11,11 @@ public class CorrectAnswerButton : MonoBehaviour
 {
     public TMP_Text correctText; // Reference to the TextMeshPro text for correct message
 
-    public void OnInteract()
+    public void OnButtonPress()
     {
         // Display the correct message
         correctText.gameObject.SetActive(true);
-        Invoke("HideCorrectMessage", 5f); // Hide the message after 5 seconds
+        Invoke("HideCorrectMessage", 1f); // Hide the message after 5 seconds
 
         // Optionally, you can add more functionality here for correct answer handling
         // For example, awarding points, progressing to the next question, etc.
@@ -26,4 +26,3 @@ public class CorrectAnswerButton : MonoBehaviour
         correctText.gameObject.SetActive(false);
     }
 }
-
