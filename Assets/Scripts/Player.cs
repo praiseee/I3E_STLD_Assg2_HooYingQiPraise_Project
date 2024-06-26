@@ -33,12 +33,4 @@ public class Player : MonoBehaviour
     {
         GameManager.Instance.GameOver();
     }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(10);
-        }
-    }
 }
