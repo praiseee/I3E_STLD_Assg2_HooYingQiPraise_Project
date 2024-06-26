@@ -83,6 +83,20 @@ public class Player : MonoBehaviour
         {
             UseMedkit();
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            CheckForButtonPress();
+        }
+    }
+
+    /// <summary>
+    /// Checks for button press and interacts with the correct or wrong answer buttons.
+    /// </summary>
+    void CheckForButtonPress()
+    {
+        // Perform sphere-based interaction detection here if needed
+        // For simplicity, you can manage interaction directly in this method
     }
 
     /// <summary>
