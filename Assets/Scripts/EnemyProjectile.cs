@@ -1,9 +1,3 @@
-/*
- * Author: Hoo Ying Qi Praise
- * Date: 23/06/2024
- * Description: Medkit script for handling medkit pickup and usage
- */
-
 using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
@@ -11,12 +5,19 @@ public class EnemyProjectile : MonoBehaviour
     public float speed = 10f;
     public int damage = 2;
 
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     private void Start()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
     }
 
+    /// <summary>
+    /// Detect collision with the player and apply damage
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
