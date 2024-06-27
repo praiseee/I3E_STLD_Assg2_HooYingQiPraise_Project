@@ -15,7 +15,7 @@ public class EnemyAI : MonoBehaviour
     /// <summary>
     /// LayerMask to only interact with objects on these layers.
     /// </summary>
-    public LayerMask whatIsGround, whatIsPlayer;
+    public LayerMask Ground, Player;
 
     /// <summary>
     /// Patrolling
@@ -51,8 +51,8 @@ public class EnemyAI : MonoBehaviour
         /// <summary>
         /// Check for player in sight and attack at range
         /// </summary>
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, Player);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, Player);
 
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
@@ -91,7 +91,7 @@ public class EnemyAI : MonoBehaviour
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, Ground))
             walkPointSet = true;
     }
 

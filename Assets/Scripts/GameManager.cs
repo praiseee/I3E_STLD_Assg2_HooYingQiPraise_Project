@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject); // Preserve GameManager across scene loads
+
+        gameOverScreen.SetActive(false);
     }
 
     // Method called when the game is over
@@ -31,14 +33,18 @@ public class GameManager : MonoBehaviour
     {
         PauseGame(); // Pause game on game over
         gameOverScreen.SetActive(true);
+        Time.timeScale = 0; // Reset time scale to normal
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Method to restart the game
     public void RestartGame()
     {
         // Reload the current scene
+        gameOverScreen.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = 1; // Reset time scale to normal
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1;
     }
 
     // Method to quit the application
