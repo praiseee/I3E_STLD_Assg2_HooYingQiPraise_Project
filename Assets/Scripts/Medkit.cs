@@ -6,7 +6,7 @@
 
 using UnityEngine;
 
-public class Medkit : MonoBehaviour
+public class PickUp : MonoBehaviour
 {
     /// <summary>
     /// Tracks whether the player is within the trigger area of the medkit.
