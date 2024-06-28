@@ -1,28 +1,18 @@
 /*
  * Author: Hoo Ying Qi Praise
  * Date: 23/06/2024
- * Description: Handling health, damage, and crystal spawning upon death
+ * Description: Enemy script handling health, damage, and crystal activation upon death
  */
 
 using UnityEngine;
 
 public class FinalEnemy : MonoBehaviour
 {
-    public int maxHealth = 150; 
-    public int currentHealth; 
-    public HealthBar enemyHealthBar; 
-    public GameObject crystalPrefab; 
-    private GameObject spawnedCrystal; 
+    public int maxHealth = 150;
+    public int currentHealth;
 
-    /// <summary>
-    /// Start the enemy's health to the max  value at the start of the game.
-    /// </summary>
-    void Start()
-    {
-        currentHealth = maxHealth;
-        enemyHealthBar.SetMaxHealth(maxHealth);
-        enemyHealthBar.SetHealth(currentHealth); // Update health bar to display current health
-    }
+    public HealthBar enemyHealthBar;
+    public GameObject crystalPrefab;
 
     /// <summary>
     /// Damage to enemies and health reduction
@@ -30,8 +20,8 @@ public class FinalEnemy : MonoBehaviour
     /// <param name="damage">Amount of damage to apply to the enemy</param>
     public void Damage(int damage)
     {
-        currentHealth -= damage;
-        enemyHealthBar.SetHealth(currentHealth); // Update health bar to display the current health
+        currentHealth = currentHealth - damage;
+        enemyHealthBar.SetHealth(currentHealth); // Update the health value displayed on the health bar.
 
         if (currentHealth <= 0)
         {
@@ -41,16 +31,30 @@ public class FinalEnemy : MonoBehaviour
     }
 
     /// <summary>
-    /// Enemy ddeath and spawn crystal
+    /// Set the enemy's health to the maximum value at the start of the game.
+    /// </summary>
+    void Start()
+    {
+        currentHealth = maxHealth;
+        enemyHealthBar.SetMaxHealth(maxHealth);
+
+        // Ensure the crystal is inactive at the start
+        if (crystalPrefab != null)
+        {
+            crystalPrefab.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Enemy death and activation of the crystal
     /// </summary>
     void Die()
     {
-        // Instantiate a crystal at the enemy's position upon death
-        spawnedCrystal = Instantiate(crystalPrefab, transform.position, Quaternion.identity);
-
-        if (spawnedCrystal != null)
+        // Activate the crystal when the enemy dies
+        if (crystalPrefab != null)
         {
-            spawnedCrystal.SetActive(false);
+            crystalPrefab.transform.position = transform.position;
+            crystalPrefab.SetActive(true);
         }
 
         Destroy(gameObject);
