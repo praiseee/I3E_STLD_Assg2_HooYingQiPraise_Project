@@ -1,40 +1,49 @@
+/*
+ * Author: Hoo Ying Qi Praise
+ * Date: 23/06/2024
+ * Description: EnemyAI script for patrolling
+ */
+
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public NavMeshAgent agent; // NavMeshAgent component for pathfinding
-    public Transform player; // Reference to the player's transform
+    public NavMeshAgent agent; //Component for pathfinding
+    public Transform player; //Player's transform
 
     /// <summary>
-    /// LayerMask to only interact with objects on these layers.
+    /// Iinteract with objects on these layers.
     /// </summary>
-    public LayerMask Ground, Player; // Layers for ground and player detection
+    public LayerMask Ground, Player; 
 
     /// <summary>
     /// Patrolling
     /// </summary>
-    public Vector3 walkPoint; // Current walk point destination
-    bool walkPointSet; // Whether the walk point is set
-    public float walkPointRange; // Range for setting walk points
+    public Vector3 walkPoint; //Current walk point destination
+    bool walkPointSet; //Is the walkpoint set?
+    public float walkPointRange; //Range for setting walk points
 
     /// <summary>
     /// Attacking
     /// </summary>
-    public float timeBetweenAttacks; // Time between attacks
-    bool alreadyAttacked; // Whether the enemy has already attacked
+    public float timeBetweenAttacks; //Time between attacks
+    bool alreadyAttacked; //Check if enemy has already attacked
 
     /// <summary>
-    /// States
+    /// States for Sight and attack ranges
     /// </summary>
-    public float sightRange, attackRange; // Sight and attack ranges
-    public bool playerInSightRange, playerInAttackRange; // Booleans for player detection
-
-    public GameObject projectilePrefab; // Reference to the projectile prefab
-    public Transform firePoint; // The point from where the projectile will be fired
+    public float sightRange, attackRange; 
+    public bool playerInSightRange, playerInAttackRange;
 
     /// <summary>
-    /// Called when the script instance is being loaded
+    /// Reference to the projectile prefab, where the projectile will be fired
+    /// </summary>
+    public GameObject projectilePrefab; 
+    public Transform firePoint; 
+
+    /// <summary>
+    /// Called when the script is being loaded
     /// </summary>
     private void Awake()
     {
@@ -43,11 +52,10 @@ public class EnemyAI : MonoBehaviour
     }
 
     /// <summary>
-    /// Update is called once per frame
+    /// Check if the player is in sight or attack range
     /// </summary>
     private void Update()
     {
-        // Check if the player is in sight or attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, Player);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, Player);
 
@@ -101,15 +109,15 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     private void AttackPlayer()
     {
-        agent.SetDestination(transform.position); // Stop the enemy from moving
+        agent.SetDestination(transform.position); //Stop the enemy from moving
 
-        transform.LookAt(player); // Face the player
+        transform.LookAt(player); //Face the player
 
         if (!alreadyAttacked)
         {
-            ShootProjectile(); // Shoot a projectile at the player
+            ShootProjectile(); //Shoot projectile at the player
             alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks); // Reset the attack
+            Invoke(nameof(ResetAttack), timeBetweenAttacks); //Reset the attack
         }
     }
 
@@ -118,11 +126,11 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     private void ShootProjectile()
     {
-        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation); // Instantiate the projectile
+        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation); // Instantiate projectile
     }
 
     /// <summary>
-    /// Reset the attack status
+    /// Reset the attack 
     /// </summary>
     private void ResetAttack()
     {

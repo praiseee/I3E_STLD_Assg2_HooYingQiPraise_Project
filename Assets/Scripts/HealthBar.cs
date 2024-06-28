@@ -10,8 +10,8 @@ using TMPro;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider; //Slider component
-    public TMP_Text healthText; //TextMeshPro text component
+    public Slider slider; 
+    public TMP_Text healthText;
 
     /// <summary>
     /// Updates the current health value displayed on the slider and text.
@@ -22,7 +22,7 @@ public class HealthBar : MonoBehaviour
         // Update the slider's value
         slider.value = health;
 
-        // Update the TextMeshPro text
+        // Update TextMeshPro text
         healthText.text = "Health: " + health.ToString();
         Debug.Log("Current health:" + health);
     }
@@ -35,8 +35,6 @@ public class HealthBar : MonoBehaviour
     {
         // Set the slider's max value
         slider.maxValue = max;
-
-        // Optionally, you can initialize the slider's current value to max
         slider.value = max;
     }
 }

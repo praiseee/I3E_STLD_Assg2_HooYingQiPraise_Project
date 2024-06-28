@@ -9,15 +9,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int maxHealth = 100; // Maximum health value for the player
-    public int currentHealth; // Current health value of the player
-    public HealthBar playerHealthBar; // Reference to the HealthBar script
-    private int medkitCount = 0; // Counter for medkits the player has collected
-    private int keyCount = 0; // Counter for keys the player has collected
-    private int crystalCount = 0; // Counter for crystals the player has collected
-    public TMP_Text medkitText; // TextMeshPro text component for medkit count
-    public TMP_Text keyText; // TextMeshPro text component for key count
-    public TMP_Text crystalText; // TextMeshPro text component for crystal count
+    public int maxHealth = 100;
+    public int currentHealth; 
+    public HealthBar playerHealthBar; 
+    private int medkitCount = 0; 
+    private int keyCount = 0; 
+    private int crystalCount = 0; 
+    public TMP_Text medkitText; 
+    public TMP_Text keyText; 
+    public TMP_Text crystalText; 
 
     /// <summary>
     /// Ensures the player starts with full health.
@@ -50,16 +50,11 @@ public class Player : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
-        // Subtract damage from the player's current health
         currentHealth -= damage;
-
-        // Update current health display on the health bar
         playerHealthBar.SetHealth(currentHealth);
 
-        // Check if the player's health has reached zero
         if (currentHealth <= 0)
         {
-            // Call the Die method to handle player death
             Die();
         }
     }
@@ -69,7 +64,6 @@ public class Player : MonoBehaviour
     /// </summary>
     void UseMedkit()
     {
-        // Check if the player has any medkits left
         if (medkitCount > 0)
         {
             // Increase health but not above maxHealth
@@ -93,14 +87,11 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// Function to handle the logic of picking up a medkit in your game.
+    /// Function to handle the logic of picking up a medkit in your game, Increment the medkit count
     /// </summary>
     public void AddMedkit()
     {
-        // Increment the medkit count
         medkitCount++;
-
-        // Update the medkit count display after picking up a medkit
         UpdateMedkitCountDisplay();
 
         Debug.Log("Medkit picked up. Total medkits: " + medkitCount);
@@ -111,10 +102,7 @@ public class Player : MonoBehaviour
     /// </summary>
     public void AddKey()
     {
-        // Increment the key count
         keyCount++;
-
-        // Update the key count display after picking up a key
         UpdateKeyCountDisplay();
 
         Debug.Log("Key picked up. Total keys: " + keyCount);
@@ -125,31 +113,24 @@ public class Player : MonoBehaviour
     /// </summary>
     public void AddCrystal()
     {
-        // Increment the crystal count
         crystalCount++;
-
-        // Update the crystal count display after picking up a crystal
         UpdateCrystalCountDisplay();
 
         Debug.Log("Crystal picked up. Total crystals: " + crystalCount);
     }
 
     /// <summary>
-    /// Update is called once per frame
+    /// Use Medkit, Check for button
     /// </summary>
     void Update()
     {
-        // Use medkit on key press (e.g., 'F')
         if (Input.GetKeyDown(KeyCode.F) && medkitCount > 0)
         {
-            // Call the UseMedkit method to use a medkit
             UseMedkit();
         }
 
-        // Check for button press on right mouse button (Fire2)
         if (Input.GetMouseButtonDown(1))
         {
-            // Call the CheckForButtonPress method to check for button press
             CheckForButtonPress();
         }
     }
@@ -159,7 +140,7 @@ public class Player : MonoBehaviour
     /// </summary>
     void CheckForButtonPress()
     {
-        // Create a RaycastHit variable to store the hit information
+        // Create a RaycastHit to store the hit information
         RaycastHit hit;
 
         // Perform a raycast from the camera to the mouse position
@@ -190,7 +171,6 @@ public class Player : MonoBehaviour
     /// </summary>
     void Die()
     {
-        // Call the GameOver method of the GameManager instance to handle game over
         GameManager.Instance.GameOver();
     }
 
@@ -199,7 +179,6 @@ public class Player : MonoBehaviour
     /// </summary>
     void UpdateMedkitCountDisplay()
     {
-        // Update the TextMeshPro text component to display the current medkit count
         medkitText.text = "Medkits: " + medkitCount.ToString();
     }
 
@@ -208,7 +187,6 @@ public class Player : MonoBehaviour
     /// </summary>
     void UpdateKeyCountDisplay()
     {
-        // Update the TextMeshPro text component to display the current key count
         keyText.text = "Keys: " + keyCount.ToString();
     }
 
@@ -217,7 +195,6 @@ public class Player : MonoBehaviour
     /// </summary>
     void UpdateCrystalCountDisplay()
     {
-        // Update the TextMeshPro text component to display the current crystal count
         crystalText.text = "Crystals: " + crystalCount.ToString();
     }
 }

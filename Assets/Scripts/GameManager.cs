@@ -1,7 +1,7 @@
 /*
  * Author: Hoo Ying Qi Praise
  * Date: 23/06/2024
- * Description: GameManager for managing game state such as game over, restart, and quit functionality.
+ * Description: Managing game state such as game over, restart, and quit functionality.
  */
 
 using UnityEngine;
@@ -31,16 +31,16 @@ public class GameManager : MonoBehaviour
     // Method called when the game is over
     public void GameOver()
     {
-        PauseGame(); // Pause game on game over
+        PauseGame();
         gameOverScreen.SetActive(true);
-        Time.timeScale = 0; // Reset time scale to normal
+        Time.timeScale = 0; 
         Cursor.lockState = CursorLockMode.None;
     }
 
     // Method to restart the game
     public void RestartGame()
     {
-        // Reload the current scene
+        // Reload current scene
         gameOverScreen.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Cursor.lockState = CursorLockMode.Locked;
@@ -48,9 +48,9 @@ public class GameManager : MonoBehaviour
     }
 
     // Method to quit the application
-    public void QuitGame()
+    public void MainMenu()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Menu");
     }
 
     // Method to pause the game

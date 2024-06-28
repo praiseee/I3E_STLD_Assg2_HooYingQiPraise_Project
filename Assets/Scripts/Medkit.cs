@@ -1,7 +1,7 @@
 /*
  * Author: Hoo Ying Qi Praise
  * Date: 23/06/2024
- * Description: Medkit script for handling medkit pickup and usage
+ * Description: Medkit pickup and usage
  */
 
 using UnityEngine;

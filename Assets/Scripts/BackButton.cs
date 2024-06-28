@@ -8,14 +8,19 @@ using UnityEngine;
 
 public class BackButton : MonoBehaviour
 {
-    public GameObject menuCanvas; // Reference to the MenuCanvas GameObject
+    public GameObject menuCanvas; //MenuCanvas GameObject
+    public GameObject settingsCanvas; //SettingsCanvas GameObject
 
+    /// <summary>
+    /// Back button from current canvas to main menu
+    /// </summary>
     public void BackToMenu()
     {
-        // Set the active state of MenuCanvas to true and SettingsCanvas to false
+        //MenuCanvas to true and SettingsCanvas to false
         menuCanvas.SetActive(true);
-        gameObject.SetActive(false); // Deactivate the current SettingsCanvas
+        settingsCanvas.SetActive(false); //Deactivate SettingsCanvas
     }
 }
+
 
 

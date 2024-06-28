@@ -1,3 +1,9 @@
+/*
+ * Author: Hoo Ying Qi Praise
+ * Date: 23/06/2024
+ * Description: instantiate Gift box for a key
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +13,10 @@ public class GiftBox : MonoBehaviour
     [SerializeField]
     private GameObject collectibleToSpawn;
 
+    /// <summary>
+    /// Logs the name of the GameObject that the gift box collided with
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Collision detected with: " + collision.gameObject.name);
@@ -19,6 +29,9 @@ public class GiftBox : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawn at the same position as the gift box
+    /// </summary>
     void SpawnCollectible()
     {
         Debug.Log("Spawning collectible at position: " + transform.position);

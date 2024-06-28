@@ -8,9 +8,14 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+    //Distinguish between different types of pickups like medkits and keys.
     public enum PickupType { Medkit, Key };
-    public PickupType pickupType; // Type of the pickup (Medkit or Key)
-    private bool isInRange = false; // Tracks whether the player is within the trigger area
+
+    //Type of the pickup (Medkit or Key)
+    public PickupType pickupType;
+
+    //// Tracks whether the player is within the trigger area
+    private bool isInRange = false; 
 
     /// <summary>
     /// To detect when the player enters trigger zone

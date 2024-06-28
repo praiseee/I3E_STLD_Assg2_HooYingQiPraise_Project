@@ -14,11 +14,10 @@ public class WrongAnswerButton : MonoBehaviour
     public TMP_Text wrongText;
 
     /// <summary>
-    /// Inflict damage to the player for a wrong answer
+    /// Dealamage to the player for a wrong answer
     /// </summary>
     public void OnButtonPress()
     {
-        // Inflict damage to the player for a wrong answer
         player.TakeDamage(damageAmount);
 
         // Hide the wrong text after a delay
@@ -26,7 +25,7 @@ public class WrongAnswerButton : MonoBehaviour
         Invoke("HideWrongMessage", 1f);
     }
 
-    // Method to hide the wrong message text
+    //ide the wrong message text
     void HideWrongMessage()
     {
         wrongText.gameObject.SetActive(false);

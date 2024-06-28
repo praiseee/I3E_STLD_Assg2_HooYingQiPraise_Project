@@ -27,7 +27,7 @@ public class Gun : MonoBehaviour
     private DamageGun damageGun;
 
     /// <summary>
-    /// checks if the left mouse button is currently being held down. Checks if the current cooldown of the weapon is less than or equal to zero.
+    /// checks if the left mouse button is held down. Checks if the current cooldown of the weapon is less than or equal to zero.
     /// </summary>
     void Start()
     {
@@ -35,13 +35,12 @@ public class Gun : MonoBehaviour
         damageGun = GetComponent<DamageGun>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButton(0) && CurrentCooldown <= 0f)
         {
-            OnGunShoot?.Invoke(); //syntax is used to safely invoke the event without throwing a null reference exception if it is not subscribed to.
-            CurrentCooldown = FireCoolDown; // resets the CurrentCooldown to the value of FireCoolDown
+            OnGunShoot?.Invoke(); //Invoke the event without throwing a null reference 
+            CurrentCooldown = FireCoolDown; // resets CurrentCooldown to the value of FireCoolDown
         }
 
         CurrentCooldown -= Time.deltaTime; //the cooldown is decremented by the time that has passed since the last frame 

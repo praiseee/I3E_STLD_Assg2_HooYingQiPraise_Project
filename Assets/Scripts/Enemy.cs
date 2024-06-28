@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     public HealthBar enemyHealthBar;
 
     /// <summary>
-    /// Logic for handling damage to enemies and health reduction
+    /// Damage to enemies and health reduction
     /// </summary>
     /// <param name="damage"></param>
     public void Damage(int damage)
@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// Initializing the player's health to the maximum possible value at the start of the game.
+    /// Player's health to the maximum value at the start of the game.
     /// </summary>
     void Start()
     {

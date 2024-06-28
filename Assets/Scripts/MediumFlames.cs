@@ -1,7 +1,7 @@
 /*
  * Author: Hoo Ying Qi Praise
  * Date: 23/06/2024
- * Description: MediumFlames hazard script that reduces player health when touched
+ * Description: MediumFlames that reduces player health when touched
  */
 
 using UnityEngine;
@@ -9,17 +9,18 @@ using UnityEngine;
 public class MediumFlames : MonoBehaviour
 {
     /// <summary>
-    ///  Implement a hazard in that damages the player character upon collision.
+    /// Damages the player character upon collision.
     /// </summary>
     /// <param name="other"></param>
-    /// 
+
+    /// <summary>
+    /// Check if the object entering the trigger is the player
+    /// </summary>
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the object entering the trigger is the player
         Player player = other.GetComponent<Player>();
         if (player != null)
         {
-            // Reduce player's health using function
             player.TakeDamage(4);
         }
     }

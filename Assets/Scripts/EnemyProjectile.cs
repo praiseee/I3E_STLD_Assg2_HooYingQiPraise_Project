@@ -6,7 +6,7 @@ public class EnemyProjectile : MonoBehaviour
     public int damage = 2;
 
     /// <summary>
-    /// Start is called before the first frame update
+    /// GameObject move forward at a constant speed.
     /// </summary>
     private void Start()
     {
@@ -15,7 +15,7 @@ public class EnemyProjectile : MonoBehaviour
     }
 
     /// <summary>
-    /// Detect collision with the player and apply damage
+    /// Detect collision with player and apply damage
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)

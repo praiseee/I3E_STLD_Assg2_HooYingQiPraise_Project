@@ -10,6 +10,10 @@ public class Crystal : MonoBehaviour
 {
     private bool isInRange = false;
 
+    /// <summary>
+    /// Checks if the collider that entered the trigger has the tag "Player"
+    /// </summary>
+    /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -18,6 +22,10 @@ public class Crystal : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the collider that exited the trigger has the tag "Player"
+    /// </summary>
+    /// <param name="other"></param>
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -26,6 +34,9 @@ public class Crystal : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Player to collect crystal when they are within range using the 'E' key.
+    /// </summary>
     void Update()
     {
         if (isInRange && Input.GetKeyDown(KeyCode.E))
@@ -34,7 +45,7 @@ public class Crystal : MonoBehaviour
             if (player != null)
             {
                 player.AddCrystal();
-                gameObject.SetActive(false); // Deactivate the crystal instead of destroying it
+                gameObject.SetActive(false); // Deactivate the crystal 
             }
         }
     }
