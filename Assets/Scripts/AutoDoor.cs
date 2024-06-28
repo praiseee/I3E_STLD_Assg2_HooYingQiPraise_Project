@@ -10,13 +10,17 @@ public class AutoDoor : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Player entered the trigger zone.");
             doorAnim.SetTrigger("open");
         }
     }
 
-    void onTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player exited the trigger zone.");
             doorAnim.SetTrigger("close");
+        }
     }
 }
