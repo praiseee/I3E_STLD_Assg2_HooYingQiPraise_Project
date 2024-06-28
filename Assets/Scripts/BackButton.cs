@@ -5,13 +5,17 @@
  */
 
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class BackButton : MonoBehaviour
 {
-    public void BackToMainMenu()
+    public GameObject menuCanvas; // Reference to the MenuCanvas GameObject
+
+    public void BackToMenu()
     {
-        SceneManager.LoadScene("MainMenu"); // Replace "MainMenu" with your actual scene name
+        // Set the active state of MenuCanvas to true and SettingsCanvas to false
+        menuCanvas.SetActive(true);
+        gameObject.SetActive(false); // Deactivate the current SettingsCanvas
     }
 }
+
 
