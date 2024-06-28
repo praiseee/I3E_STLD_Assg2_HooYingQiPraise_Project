@@ -18,6 +18,10 @@ public class AutoDoor : MonoBehaviour
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
+    /// <summary>
+    /// Checks is collision occured
+    /// </summary>
+    /// <param name="collision"></param>
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))

@@ -13,6 +13,9 @@ public class GiftBox : MonoBehaviour
     [SerializeField]
     private GameObject collectibleToSpawn;
 
+    [SerializeField]
+    private Vector3 spawnOffset; // Offset to adjust the spawn position of the collectible
+
     /// <summary>
     /// Logs the name of the GameObject that the gift box collided with
     /// </summary>
@@ -30,11 +33,12 @@ public class GiftBox : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawn at the same position as the gift box
+    /// Spawn at the same position as the gift box with an optional offset
     /// </summary>
     void SpawnCollectible()
     {
-        Debug.Log("Spawning collectible at position: " + transform.position);
-        Instantiate(collectibleToSpawn, transform.position, collectibleToSpawn.transform.rotation);
+        Vector3 spawnPosition = transform.position + spawnOffset;
+        Debug.Log("Spawning collectible at position: " + spawnPosition);
+        Instantiate(collectibleToSpawn, spawnPosition, collectibleToSpawn.transform.rotation);
     }
 }
