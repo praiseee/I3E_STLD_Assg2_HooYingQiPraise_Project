@@ -1,7 +1,7 @@
 /*
  * Author: Hoo Ying Qi Praise
  * Date: 23/06/2024
- * Description: Player script handling health, damage, medkits, and keys
+ * Description: Player script handling health, damage, medkits, keys, and crystals
  */
 
 using TMPro;
@@ -14,8 +14,10 @@ public class Player : MonoBehaviour
     public HealthBar playerHealthBar; // Reference to the HealthBar script
     private int medkitCount = 0; // Counter for medkits the player has collected
     private int keyCount = 0; // Counter for keys the player has collected
+    private int crystalCount = 0; // Counter for crystals the player has collected
     public TMP_Text medkitText; // TextMeshPro text component for medkit count
     public TMP_Text keyText; // TextMeshPro text component for key count
+    public TMP_Text crystalText; // TextMeshPro text component for crystal count
 
     /// <summary>
     /// Ensures the player starts with full health.
@@ -36,6 +38,9 @@ public class Player : MonoBehaviour
 
         // Update the initial key count display
         UpdateKeyCountDisplay();
+
+        // Update the initial crystal count display
+        UpdateCrystalCountDisplay();
     }
 
     /// <summary>
@@ -116,6 +121,20 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
+    /// Function to handle the logic of picking up a crystal in game.
+    /// </summary>
+    public void AddCrystal()
+    {
+        // Increment the crystal count
+        crystalCount++;
+
+        // Update the crystal count display after picking up a crystal
+        UpdateCrystalCountDisplay();
+
+        Debug.Log("Crystal picked up. Total crystals: " + crystalCount);
+    }
+
+    /// <summary>
     /// Update is called once per frame
     /// </summary>
     void Update()
@@ -190,6 +209,16 @@ public class Player : MonoBehaviour
     void UpdateKeyCountDisplay()
     {
         // Update the TextMeshPro text component to display the current key count
-        keyText.text = "Key: " + keyCount.ToString();
+        keyText.text = "Keys: " + keyCount.ToString();
+    }
+
+    /// <summary>
+    /// Updates the crystal count display using TextMeshPro.
+    /// </summary>
+    void UpdateCrystalCountDisplay()
+    {
+        // Update the TextMeshPro text component to display the current crystal count
+        crystalText.text = "Crystals: " + crystalCount.ToString();
     }
 }
+
