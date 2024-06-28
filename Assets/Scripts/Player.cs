@@ -10,36 +10,25 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int maxHealth = 100;
-    public int currentHealth; 
-    public HealthBar playerHealthBar; 
-    private int medkitCount = 0; 
-    private int keyCount = 0; 
-    private int crystalCount = 0; 
-    public TMP_Text medkitText; 
-    public TMP_Text keyText; 
-    public TMP_Text crystalText; 
+    public int currentHealth;
+    public HealthBar playerHealthBar;
+    private int medkitCount = 0;
+    private int keyCount = 0;
+    private int crystalCount = 0;
+    public TMP_Text medkitText;
+    public TMP_Text keyText;
+    public TMP_Text crystalText;
 
     /// <summary>
     /// Ensures the player starts with full health.
     /// </summary>
     void Start()
     {
-        // Set the player's health to the maximum health value at the start
         currentHealth = maxHealth;
-
-        // Set the maximum health value on the health bar
         playerHealthBar.SetMaxHealth(maxHealth);
-
-        // Update the health bar to display the current health
         playerHealthBar.SetHealth(currentHealth);
-
-        // Update the initial medkit count display
         UpdateMedkitCountDisplay();
-
-        // Update the initial key count display
         UpdateKeyCountDisplay();
-
-        // Update the initial crystal count display
         UpdateCrystalCountDisplay();
     }
 
@@ -66,18 +55,10 @@ public class Player : MonoBehaviour
     {
         if (medkitCount > 0)
         {
-            // Increase health but not above maxHealth
             currentHealth = Mathf.Min(currentHealth + 5, maxHealth);
-
-            // Update current health display on the health bar
             playerHealthBar.SetHealth(currentHealth);
-
-            // Decrement Medkit count when used
             medkitCount--;
-
-            // Update the medkit count display after using a medkit
             UpdateMedkitCountDisplay();
-
             Debug.Log("Used a medkit. Remaining medkits: " + medkitCount);
         }
         else
@@ -93,7 +74,6 @@ public class Player : MonoBehaviour
     {
         medkitCount++;
         UpdateMedkitCountDisplay();
-
         Debug.Log("Medkit picked up. Total medkits: " + medkitCount);
     }
 
@@ -104,7 +84,6 @@ public class Player : MonoBehaviour
     {
         keyCount++;
         UpdateKeyCountDisplay();
-
         Debug.Log("Key picked up. Total keys: " + keyCount);
     }
 
@@ -115,7 +94,6 @@ public class Player : MonoBehaviour
     {
         crystalCount++;
         UpdateCrystalCountDisplay();
-
         Debug.Log("Crystal picked up. Total crystals: " + crystalCount);
     }
 
@@ -140,26 +118,19 @@ public class Player : MonoBehaviour
     /// </summary>
     void CheckForButtonPress()
     {
-        // Create a RaycastHit to store the hit information
         RaycastHit hit;
-
-        // Perform a raycast from the camera to the mouse position
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
         {
-            // Check if the hit object has a CorrectAnswerButton component
             CorrectAnswerButton correctButton = hit.collider.GetComponent<CorrectAnswerButton>();
             if (correctButton != null)
             {
-                // Call the OnButtonPress method of the CorrectAnswerButton
                 correctButton.OnButtonPress();
                 return;
             }
 
-            // Check if the hit object has a WrongAnswerButton component
             WrongAnswerButton wrongButton = hit.collider.GetComponent<WrongAnswerButton>();
             if (wrongButton != null)
             {
-                // Call the OnButtonPress method of the WrongAnswerButton
                 wrongButton.OnButtonPress();
                 return;
             }
@@ -197,5 +168,22 @@ public class Player : MonoBehaviour
     {
         crystalText.text = "Crystals: " + crystalCount.ToString();
     }
-}
 
+    /// <summary>
+    /// Get the current key count of the player.
+    /// </summary>
+    /// <returns>The number of keys the player has collected</returns>
+    public int GetKeyCount()
+    {
+        return keyCount;
+    }
+
+    /// <summary>
+    /// Get the current crystal count of the player.
+    /// </summary>
+    /// <returns>The number of crystals the player has collected</returns>
+    public int GetCrystalCount()
+    {
+        return crystalCount;
+    }
+}

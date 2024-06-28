@@ -1,3 +1,9 @@
+/*
+ * Author: Hoo Ying Qi Praise
+ * Date: 23/06/2024
+ * Description: AutoDoor script handling automatic door behavior based on player key count
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,22 +11,34 @@ using UnityEngine;
 public class AutoDoor : MonoBehaviour
 {
     public Animator doorAnim;
+    private Player player; // Reference to the Player script
 
-    void OnTriggerEnter(Collider other)
+    void Start()
     {
-        if (other.CompareTag("Player"))
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player entered the trigger zone.");
-            doorAnim.SetTrigger("open");
+            if (player != null && player.GetKeyCount() > 0)
+            {
+                Debug.Log("Player collided with the door and has collected a key.");
+                doorAnim.SetTrigger("open");
+            }
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void OnCollisionExit(Collision collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player exited the trigger zone.");
-            doorAnim.SetTrigger("close");
+            if (player != null && player.GetKeyCount() > 0)
+            {
+                Debug.Log("Player stopped colliding with the door.");
+                doorAnim.SetTrigger("close");
+            }
         }
     }
 }
