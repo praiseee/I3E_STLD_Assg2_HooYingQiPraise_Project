@@ -12,20 +12,12 @@ public class DamageGun : MonoBehaviour
     public float BulletRange;
     private Transform PlayerCamera;
 
+    /// <summary>
+    /// Initialize the player camera
+    /// </summary>
     void Start()
     {
         PlayerCamera = Camera.main.transform;
-    }
-
-    /// <summary>
-    /// Checks for player input to fire the weapon
-    /// </summary>
-    void Update()
-    {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Shoot();
-        }
     }
 
     /// <summary>
@@ -33,14 +25,14 @@ public class DamageGun : MonoBehaviour
     /// </summary>
     public void Shoot()
     {
-        Ray gunRay = new Ray(PlayerCamera.position, PlayerCamera.forward); //creates a new ray, ray starts from the position of the PlayerCamera
-        if (Physics.Raycast(gunRay, out RaycastHit hitInfo, BulletRange)) //checks if the ray hits any collider within a maximum distance of BulletRange.
+        Ray gunRay = new Ray(PlayerCamera.position, PlayerCamera.forward); // Creates a new ray, ray starts from the position of the PlayerCamera
+        if (Physics.Raycast(gunRay, out RaycastHit hitInfo, BulletRange)) // Checks if the ray hits any collider within a maximum distance of BulletRange
         {
-            Enemy enemy = hitInfo.collider.gameObject.GetComponent<Enemy>(); //GameObject that was hit by raycast 
+            Enemy enemy = hitInfo.collider.gameObject.GetComponent<Enemy>(); // GameObject that was hit by raycast 
             if (enemy != null)
             {
-                enemy.Damage(5); //reduces its CurrentHealth
-                Debug.Log("Shot entity, new health: "); 
+                enemy.Damage((int)Damage); // Reduces its CurrentHealth
+                Debug.Log("Shot entity, new health: " + enemy.currentHealth);
             }
         }
     }

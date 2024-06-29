@@ -9,47 +9,58 @@ using UnityEngine.Events;
 
 public class Gun : MonoBehaviour
 {
-    /// <summary>
-    /// This variable allows us to connect other variables to create custom gun behavior
-    /// </summary>
     public UnityEvent OnGunShoot;
 
-    /// <summary>
-    /// Number of seconds acting as a buffer between firing
-    /// </summary>
     public float FireCoolDown;
-
-    /// <summary>
-    /// Store current cooldown of the weapon
-    /// </summary>
     private float CurrentCooldown;
 
+    /// <summary>
+    /// Reference to DamageGun script
+    /// </summary>
     private DamageGun damageGun;
 
     /// <summary>
-    /// checks if the left mouse button is held down. Checks if the current cooldown of the weapon is less than or equal to zero.
+    /// AudioSource 
+    /// </summary>
+    private AudioSource audioSource;
+
+    /// <summary>
+    /// AudioClip for shooting sound
+    /// </summary>
+    public AudioClip shootingSound;
+
+    /// <summary>
+    /// Initialize gun and its components
     /// </summary>
     void Start()
     {
         CurrentCooldown = FireCoolDown;
         damageGun = GetComponent<DamageGun>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        if (Input.GetMouseButton(0) && CurrentCooldown <= 0f)
+        if (Input.GetMouseButtonDown(0) && CurrentCooldown <= 0f)
         {
             OnGunShoot?.Invoke(); //Invoke the event without throwing a null reference 
-            CurrentCooldown = FireCoolDown; // resets CurrentCooldown to the value of FireCoolDown
+            CurrentCooldown = FireCoolDown; //resets CurrentCooldown to the value of FireCoolDown
+
+            // Play the shooting sound
+            if (shootingSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(shootingSound);
+            }
         }
 
         CurrentCooldown -= Time.deltaTime; //the cooldown is decremented by the time that has passed since the last frame 
     }
 
-
+    /// <summary>
+    /// Method to handle shooting actions
+    /// </summary>
     public void OnShoot()
     {
         damageGun.Shoot();
-
     }
 }

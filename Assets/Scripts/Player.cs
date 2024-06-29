@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public TMP_Text medkitText;
     public TMP_Text keyText;
     public TMP_Text crystalText;
+    public TMP_Text healMessageText;
 
     /// <summary>
     /// Ensures the player starts with full health.
@@ -59,6 +60,7 @@ public class Player : MonoBehaviour
             playerHealthBar.SetHealth(currentHealth);
             medkitCount--;
             UpdateMedkitCountDisplay();
+            DisplayHealMessage(); // Display heal message
             Debug.Log("Used a medkit. Remaining medkits: " + medkitCount);
         }
         else
@@ -167,6 +169,23 @@ public class Player : MonoBehaviour
     void UpdateCrystalCountDisplay()
     {
         crystalText.text = "Crystals: " + crystalCount.ToString();
+    }
+
+    /// <summary>
+    /// Display the message when a medkit is used to heal.
+    /// </summary>
+    void DisplayHealMessage()
+    {
+        healMessageText.gameObject.SetActive(true);
+        Invoke("HideHealMessage", 2f); // Hide message after 2 seconds
+    }
+
+    /// <summary>
+    /// Hide the heal message.
+    /// </summary>
+    void HideHealMessage()
+    {
+        healMessageText.gameObject.SetActive(false);
     }
 
     /// <summary>
