@@ -7707,7 +7707,7 @@ PrefabInstance:
     - target: {fileID: 6556307555316582679, guid: 035bf1ba97d19214580cfe6f5a29fdc3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2282.1
+      value: -2282.49
       objectReference: {fileID: 0}
     - target: {fileID: 6556307555316582679, guid: 035bf1ba97d19214580cfe6f5a29fdc3,
         type: 3}
@@ -13099,7 +13099,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 836055072}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: MainMenu
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26079,13 +26079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1833630010}
-  popupCanvases:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  popupCanvases: []
   keyCount: 0
   crystalCount: 0
 --- !u!4 &836055073
@@ -55340,6 +55334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectibleToSpawn: {fileID: 5359885412941202263, guid: b3c77796ce9650a4da581aa67938f120,
     type: 3}
+  congratulatoryCanvas: {fileID: 1830588852}
 --- !u!1 &1803352524
 GameObject:
   m_ObjectHideFlags: 0
@@ -57079,7 +57074,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1830588853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73114,5 +73109,5 @@ SceneRoots:
   - {fileID: 1833630014}
   - {fileID: 836055073}
   - {fileID: 1315102389}
-  - {fileID: 319433815}
   - {fileID: 1830588856}
+  - {fileID: 319433815}

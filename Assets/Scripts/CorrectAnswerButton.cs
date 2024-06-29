@@ -11,19 +11,36 @@ using System.Collections.Generic;
 public class CorrectAnswerButton : MonoBehaviour
 {
     public TMP_Text correctText;
-
-    /// <summary>
-    /// List of wall objects to destroy upon correct answer
-    /// </summary>
     public List<GameObject> wallsToDestroy = new List<GameObject>();
+    public AudioClip correctSound; // Assigned in the Unity Editor
+
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.playOnAwake = false;
+    }
 
     /// <summary>
     /// Display the correct message. Hide the message after 1 second and destroy the specified walls.
+    /// Play correct sound when button is pressed.
     /// </summary>
     public void OnButtonPress()
     {
         correctText.gameObject.SetActive(true);
         Invoke("HideCorrectMessage", 1f);
+
+        // Play correct sound
+        if (correctSound != null && audioSource != null)
+        {
+            audioSource.clip = correctSound; // Assign the correct sound clip
+            audioSource.Play();
+        }
 
         // Loop through all walls to destroy
         foreach (GameObject wall in wallsToDestroy)

@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> popupCanvases; // List to hold multiple popup canvases
     private bool isPopupActive = false;
 
-    //Variables to track player progress across scenes
+    // Variables to track player progress across scenes
     public int keyCount = 0;
     public int crystalCount = 0;
 
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
         gameOverScreen.SetActive(false);
 
-        //Deactivate all popup canvases initially
+        // Deactivate all popup canvases initially
         foreach (GameObject popupCanvas in popupCanvases)
         {
             popupCanvas.SetActive(false);
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Handles game over state by pausing the game
+    /// Handles game over state by pausing the game and showing game over screen
     /// </summary>
     public void GameOver()
     {
@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(true);
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true; // Show cursor for UI interaction
     }
 
     /// <summary>
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
+        Cursor.visible = false; // Hide cursor after resuming game
     }
 
     /// <summary>
@@ -95,11 +97,13 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Deactivating all popups
+    /// Resumes the game and deactivates all popups
     /// </summary>
     void ResumeGame()
     {
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked; // Lock cursor when game resumes
+        Cursor.visible = false; // Hide cursor when game resumes
         DeactivateAllPopups(); // Ensure all popups are deactivated when resuming
         isPopupActive = false;
     }
@@ -126,18 +130,18 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// Coroutine to resume the game after a specified delay
-    /// Coroutines are special methods that can pause execution and yield control back to Unity
     /// </summary>
     /// <param name="delay"></param>
     /// <returns></returns>
     private IEnumerator ResumeAfterDelay(float delay)
     {
-        yield return new WaitForSecondsRealtime(delay); //he method takes a single parameter, delay, which is a float
+        yield return new WaitForSecondsRealtime(delay);
         if (isPopupActive)
         {
             ResumeGame();
         }
     }
+
     /// <summary>
     /// Deactivates all popup canvases
     /// </summary>
@@ -149,7 +153,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //Manage key and crystal counts
+    // Methods to manage key and crystal counts
     public void AddKey()
     {
         keyCount++;
