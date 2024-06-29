@@ -4,7 +4,6 @@
  * Description: Navigation between different menus in a game
  */
 
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,7 +24,7 @@ public class MenuController : MonoBehaviour
     }
 
     /// <summary>
-    /// // Enable the Canvas and disable the other Canvas
+    /// Enable the Canvas and disable the other Canvases
     /// </summary>
     public void SettingsOptions()
     {

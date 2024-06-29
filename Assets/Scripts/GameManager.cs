@@ -14,21 +14,22 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        // Singleton pattern to ensure only one instance of GameManager exists
+        //Tnsure only one instance of GameManager exists
         if (Instance == null)
             Instance = this;
         else
         {
-            Destroy(gameObject); // Destroy duplicate GameManager instances
+            //Destroy duplicate GameManager instances
+            Destroy(gameObject);
             return;
         }
 
-        DontDestroyOnLoad(gameObject); // Preserve GameManager across scene loads
-
+        //Preserve GameManager across scene loads
+        DontDestroyOnLoad(gameObject);
         gameOverScreen.SetActive(false);
     }
 
-    // Method called when the game is over
+    //When game is over
     public void GameOver()
     {
         PauseGame();
@@ -37,23 +38,23 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
-    // Method to restart the game
+    //Restart the game
     public void RestartGame()
     {
-        // Reload current scene
+        //Reload current scene
         gameOverScreen.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
     }
 
-    // Method to quit the application
+    //Quit the application
     public void MainMenu()
     {
         SceneManager.LoadScene("Menu");
     }
 
-    // Method to pause the game
+    //To pause the game
     void PauseGame()
     {
         Time.timeScale = 0; // Freeze game time

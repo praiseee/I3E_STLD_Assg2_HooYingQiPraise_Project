@@ -1,7 +1,7 @@
 /*
  * Author: Hoo Ying Qi Praise
- * Date: 29/06/2024
- * Description: Toggle a canvas with the Tab key and handle menu navigation
+ * Date: 23/06/2024
+ * Description: Handle different menus in main game, includes toggle
  */
 
 using UnityEngine;
@@ -10,68 +10,75 @@ using UnityEngine.SceneManagement;
 public class ToggleCanvas : MonoBehaviour
 {
     public Canvas canvasToToggle;
-    public Canvas mainMenuCanvas;
-    public Canvas settingsCanvas;
-    public Canvas menuCanvas;
-    public Canvas creditCanvas;
     public Canvas instructionCanvas;
+    public Canvas toggleCanvas;
+
+    private bool isCanvasActive;
+    private bool isGamePaused;
+
+    private void Start()
+    {
+        isCanvasActive = canvasToToggle.gameObject.activeSelf;
+        isGamePaused = false; // Initialize game pause state
+    }
 
     private void Update()
     {
         // Check if the "Tab" key is pressed
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            // Toggle the active state of the canvas
-            canvasToToggle.gameObject.SetActive(!canvasToToggle.gameObject.activeSelf);
+            //State of the canvas
+            isCanvasActive = !isCanvasActive;
+            canvasToToggle.gameObject.SetActive(isCanvasActive);
+
+            //Game pause state
+            isGamePaused = isCanvasActive;
+            ToggleGamePause(isGamePaused);
         }
     }
 
     /// <summary>
-    /// Player get to play game, scene is switched to main
+    /// Load scene back to menu
     /// </summary>
-    public void PlayGame()
+    public void MainMenu()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Menu");
     }
 
     /// <summary>
     /// Enable the Canvas and disable the other Canvases
     /// </summary>
-    public void SettingsOptions()
-    {
-        settingsCanvas.gameObject.SetActive(true);
-        mainMenuCanvas.gameObject.SetActive(false);
-        menuCanvas.gameObject.SetActive(false);
-        Debug.Log("Options button clicked");
-    }
 
-    public void ShowCredits()
+    public void Instruction()
     {
-        creditCanvas.gameObject.SetActive(true);
-        mainMenuCanvas.gameObject.SetActive(false);
-        menuCanvas.gameObject.SetActive(false);
-        Debug.Log("Credits button clicked");
+        instructionCanvas.gameObject.SetActive(true);
+        toggleCanvas.gameObject.SetActive(false);
+
+        // Pause the game when instruction canvas is active
+        ToggleGamePause(true);
     }
 
     public void BackButton()
     {
-        menuCanvas.gameObject.SetActive(true);
-        settingsCanvas.gameObject.SetActive(false);
-        creditCanvas.gameObject.SetActive(false);
+        toggleCanvas.gameObject.SetActive(true);
         instructionCanvas.gameObject.SetActive(false);
-        Debug.Log("Back button clicked");
+        Debug.Log("Back button Click");
+
+        // Resume the game when returning from instruction canvas
+        ToggleGamePause(false);
     }
 
-    public void HowToPlay()
+    private void ToggleGamePause(bool pause)
     {
-        menuCanvas.gameObject.SetActive(false);
-        settingsCanvas.gameObject.SetActive(false);
-        creditCanvas.gameObject.SetActive(false);
-        instructionCanvas.gameObject.SetActive(true);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
+        if (pause)
+        {
+            Time.timeScale = 0; // Freeze game time
+            Cursor.lockState = CursorLockMode.None; // Unlock cursor
+        }
+        else
+        {
+            Time.timeScale = 1; // Resume game time
+            Cursor.lockState = CursorLockMode.Locked; // Lock cursor
+        }
     }
 }
