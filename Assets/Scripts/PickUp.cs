@@ -1,7 +1,7 @@
 /*
  * Author: Hoo Ying Qi Praise
  * Date: 23/06/2024
- * Description: Pickup script for handling medkit and key pickup
+ * Description: Player Input for handling medkit and key pickup
  */
 
 using UnityEngine;
@@ -14,7 +14,7 @@ public class Pickup : MonoBehaviour
     //Type of the pickup (Medkit or Key)
     public PickupType pickupType;
 
-    //// Tracks whether the player is within the trigger area
+    //Tracks whether the player is within the trigger area
     private bool isInRange = false; 
 
     /// <summary>
@@ -42,7 +42,7 @@ public class Pickup : MonoBehaviour
     }
 
     /// <summary>
-    /// If collision occurs and player is detected, pickup is collected
+    /// If collision occurs and player is detected, pickup is collected. (Key or Medkit)
     /// </summary>
     void Update()
     {

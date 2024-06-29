@@ -25,7 +25,7 @@ public class WrongAnswerButton : MonoBehaviour
         Invoke("HideWrongMessage", 1f);
     }
 
-    //ide the wrong message text
+    //Hide the wrong message text
     void HideWrongMessage()
     {
         wrongText.gameObject.SetActive(false);

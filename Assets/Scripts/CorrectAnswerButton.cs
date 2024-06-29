@@ -1,3 +1,9 @@
+/*
+ * Author: Hoo Ying Qi Praise
+ * Date: 23/06/2024
+ * Description: Script for handling correct answer button interaction
+ */
+
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
@@ -5,7 +11,11 @@ using System.Collections.Generic;
 public class CorrectAnswerButton : MonoBehaviour
 {
     public TMP_Text correctText;
-    public List<GameObject> wallsToDestroy = new List<GameObject>(); // List of wall objects to destroy upon correct answer
+
+    /// <summary>
+    /// List of wall objects to destroy upon correct answer
+    /// </summary>
+    public List<GameObject> wallsToDestroy = new List<GameObject>();
 
     /// <summary>
     /// Display the correct message. Hide the message after 1 second and destroy the specified walls.
@@ -25,6 +35,9 @@ public class CorrectAnswerButton : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hide Correct message 
+    /// </summary>
     void HideCorrectMessage()
     {
         correctText.gameObject.SetActive(false);

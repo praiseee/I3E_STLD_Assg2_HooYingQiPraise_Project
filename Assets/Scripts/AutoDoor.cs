@@ -1,11 +1,9 @@
 /*
  * Author: Hoo Ying Qi Praise
  * Date: 23/06/2024
- * Description: AutoDoor script handling automatic door behavior based on player key count
+ * Description: AutoDoor script handling automatic door behavior
  */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AutoDoor : MonoBehaviour
@@ -19,7 +17,7 @@ public class AutoDoor : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks is collision occured
+    /// Checks if collision occured
     /// </summary>
     /// <param name="collision"></param>
     void OnCollisionEnter(Collision collision)

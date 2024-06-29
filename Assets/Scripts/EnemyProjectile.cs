@@ -1,3 +1,9 @@
+/*
+ * Author: Hoo Ying Qi Praise
+ * Date: 23/06/2024
+ * Description: Behaviour of Enemy Projectiles, bullets
+ */
+
 using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
