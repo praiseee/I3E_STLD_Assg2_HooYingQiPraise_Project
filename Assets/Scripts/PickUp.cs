@@ -8,6 +8,9 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+    [SerializeField]
+    private AudioClip collectAudio;
+
     //Distinguish between different types of pickups like medkits and keys.
     public enum PickupType { Medkit, Key };
 
@@ -15,19 +18,7 @@ public class Pickup : MonoBehaviour
     public PickupType pickupType;
 
     //Tracks whether the player is within the trigger area
-    private bool isInRange = false;
-
-    [SerializeField]
-    private AudioClip pickupSound;
-    private AudioSource audioSource;
-
-    /// <summary>
-    /// Initializes the AudioSource component
-    /// </summary>
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+    private bool isInRange = false; 
 
     /// <summary>
     /// To detect when the player enters trigger zone
@@ -63,28 +54,18 @@ public class Pickup : MonoBehaviour
             Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
             if (player != null)
             {
-                PlayPickupSound();
                 if (pickupType == PickupType.Medkit)
                 {
+                    AudioSource.PlayClipAtPoint(collectAudio, transform.position, 0.5f);
                     player.AddMedkit();
                 }
                 else if (pickupType == PickupType.Key)
                 {
+                    AudioSource.PlayClipAtPoint(collectAudio, transform.position, 1f);
                     player.AddKey();
                 }
                 Destroy(gameObject);
             }
-        }
-    }
-
-    /// <summary>
-    /// Plays the pickup sound.
-    /// </summary>
-    void PlayPickupSound()
-    {
-        if (pickupSound != null && audioSource != null)
-        {
-            audioSource.PlayOneShot(pickupSound);
         }
     }
 }

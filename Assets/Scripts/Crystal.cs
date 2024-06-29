@@ -11,6 +11,9 @@ public class Crystal : MonoBehaviour
     private bool isInRange = false;
     private Player player;
 
+    [SerializeField]
+    private AudioClip collectAudio;
+
     /// <summary>
     /// Checks if the collider that entered the collision has the tag "Player"
     /// </summary>
@@ -50,6 +53,8 @@ public class Crystal : MonoBehaviour
         {
             player.AddCrystal();
             gameObject.SetActive(false); // Deactivate the crystal 
+            AudioSource.PlayClipAtPoint(collectAudio, transform.position, 1f);
+
             Debug.Log("Crystal collected");
         }
     }

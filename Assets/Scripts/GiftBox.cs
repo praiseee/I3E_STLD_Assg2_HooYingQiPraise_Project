@@ -4,6 +4,8 @@
  * Description: instantiate Gift box for a key
  */
 
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GiftBox : MonoBehaviour
@@ -12,16 +14,7 @@ public class GiftBox : MonoBehaviour
     private GameObject collectibleToSpawn;
 
     [SerializeField]
-    private AudioClip collisionSound;
-    private AudioSource audioSource;
-
-    /// <summary>
-    /// Initializes the AudioSource component.
-    /// </summary>
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+    private AudioClip collectAudio;
 
     /// <summary>
     /// Logs the name of the GameObject that the gift box collided with
@@ -34,8 +27,9 @@ public class GiftBox : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player collided with the gift box.");
-            PlayCollisionSound();
             SpawnCollectible();
+            AudioSource.PlayClipAtPoint(collectAudio, transform.position, 1f);
+
             Destroy(gameObject);
         }
     }
@@ -47,16 +41,5 @@ public class GiftBox : MonoBehaviour
     {
         Debug.Log("Spawning collectible at position: " + transform.position);
         Instantiate(collectibleToSpawn, transform.position, collectibleToSpawn.transform.rotation);
-    }
-
-    /// <summary>
-    /// Plays the collision sound.
-    /// </summary>
-    void PlayCollisionSound()
-    {
-        if (collisionSound != null && audioSource != null)
-        {
-            audioSource.PlayOneShot(collisionSound);
-        }
     }
 }
