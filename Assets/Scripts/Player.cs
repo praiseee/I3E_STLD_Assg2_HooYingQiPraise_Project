@@ -13,8 +13,6 @@ public class Player : MonoBehaviour
     public int currentHealth;
     public HealthBar playerHealthBar;
     private int medkitCount = 0;
-    private int keyCount = 0;
-    private int crystalCount = 0;
     public TMP_Text medkitText;
     public TMP_Text keyText;
     public TMP_Text crystalText;
@@ -28,6 +26,8 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         playerHealthBar.SetMaxHealth(maxHealth);
         playerHealthBar.SetHealth(currentHealth);
+
+        // Initialize key and crystal counts from GameManager
         UpdateMedkitCountDisplay();
         UpdateKeyCountDisplay();
         UpdateCrystalCountDisplay();
@@ -84,9 +84,9 @@ public class Player : MonoBehaviour
     /// </summary>
     public void AddKey()
     {
-        keyCount++;
+        GameManager.Instance.AddKey();
         UpdateKeyCountDisplay();
-        Debug.Log("Key picked up. Total keys: " + keyCount);
+        Debug.Log("Key picked up. Total keys: " + GameManager.Instance.GetKeyCount());
     }
 
     /// <summary>
@@ -94,9 +94,9 @@ public class Player : MonoBehaviour
     /// </summary>
     public void AddCrystal()
     {
-        crystalCount++;
+        GameManager.Instance.AddCrystal();
         UpdateCrystalCountDisplay();
-        Debug.Log("Crystal picked up. Total crystals: " + crystalCount);
+        Debug.Log("Crystal picked up. Total crystals: " + GameManager.Instance.GetCrystalCount());
     }
 
     /// <summary>
@@ -160,7 +160,7 @@ public class Player : MonoBehaviour
     /// </summary>
     void UpdateKeyCountDisplay()
     {
-        keyText.text = "Keys: " + keyCount.ToString();
+        keyText.text = "Keys: " + GameManager.Instance.GetKeyCount().ToString();
     }
 
     /// <summary>
@@ -168,7 +168,7 @@ public class Player : MonoBehaviour
     /// </summary>
     void UpdateCrystalCountDisplay()
     {
-        crystalText.text = "Crystals: " + crystalCount.ToString();
+        crystalText.text = "Crystals: " + GameManager.Instance.GetCrystalCount().ToString();
     }
 
     /// <summary>
@@ -194,7 +194,7 @@ public class Player : MonoBehaviour
     /// <returns>The number of keys the player has collected</returns>
     public int GetKeyCount()
     {
-        return keyCount;
+        return GameManager.Instance.GetKeyCount();
     }
 
     /// <summary>
@@ -203,6 +203,6 @@ public class Player : MonoBehaviour
     /// <returns>The number of crystals the player has collected</returns>
     public int GetCrystalCount()
     {
-        return crystalCount;
+        return GameManager.Instance.GetCrystalCount();
     }
 }

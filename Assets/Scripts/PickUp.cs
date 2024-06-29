@@ -18,7 +18,7 @@ public class Pickup : MonoBehaviour
     public PickupType pickupType;
 
     //Tracks whether the player is within the trigger area
-    private bool isInRange = false; 
+    private bool isInRange = false;
 
     /// <summary>
     /// To detect when the player enters trigger zone

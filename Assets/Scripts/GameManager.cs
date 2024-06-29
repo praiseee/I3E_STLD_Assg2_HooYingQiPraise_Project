@@ -1,7 +1,7 @@
 /*
  * Author: Hoo Ying Qi Praise
  * Date: 23/06/2024
- * Description: Managing game state such as game over, restart, and quit functionality, including trigger-based canvas popup and pause.
+ * Description: Managing game state such as game over, restart, and quit,canvas popup and pause.
  */
 
 using UnityEngine;
@@ -13,29 +13,41 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameObject gameOverScreen;
-    public List<GameObject> popupCanvases;  // List to hold multiple popup canvases
+    public List<GameObject> popupCanvases; // List to hold multiple popup canvases
     private bool isPopupActive = false;
 
+    //Variables to track player progress across scenes
+    public int keyCount = 0;
+    public int crystalCount = 0;
+
+    /// <summary>
+    /// Checking if there are any game managers in the scene
+    /// </summary>
     void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            DontDestroyOnLoad(gameObject); // Persist across scenes
+        }
         else
         {
             Destroy(gameObject);
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
         gameOverScreen.SetActive(false);
 
-        // Deactivate all popup canvases initially
+        //Deactivate all popup canvases initially
         foreach (GameObject popupCanvas in popupCanvases)
         {
             popupCanvas.SetActive(false);
         }
     }
 
+    /// <summary>
+    /// Checks if a popup is active and the Return key is pressed to resume the game
+    /// </summary>
     void Update()
     {
         if (isPopupActive && Input.GetKeyDown(KeyCode.Return))
@@ -44,6 +56,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles game over state by pausing the game
+    /// </summary>
     public void GameOver()
     {
         PauseGame();
@@ -52,6 +67,9 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
     }
 
+    /// <summary>
+    /// Restarts the current game scene by reloading
+    /// </summary>
     public void RestartGame()
     {
         gameOverScreen.SetActive(false);
@@ -60,16 +78,25 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    /// <summary>
+    /// Loads the main menu scene
+    /// </summary>
     public void MainMenu()
     {
         SceneManager.LoadScene("Menu");
     }
 
+    /// <summary>
+    /// Pauses the game
+    /// </summary>
     void PauseGame()
     {
         Time.timeScale = 0;
     }
 
+    /// <summary>
+    /// Deactivating all popups
+    /// </summary>
     void ResumeGame()
     {
         Time.timeScale = 1;
@@ -77,6 +104,10 @@ public class GameManager : MonoBehaviour
         isPopupActive = false;
     }
 
+    /// <summary>
+    /// Triggers a popup canvas by its index
+    /// </summary>
+    /// <param name="popupIndex"></param>
     public void TriggerPopup(int popupIndex)
     {
         if (popupIndex >= 0 && popupIndex < popupCanvases.Count)
@@ -93,15 +124,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Coroutine to resume the game after a specified delay
+    /// Coroutines are special methods that can pause execution and yield control back to Unity
+    /// </summary>
+    /// <param name="delay"></param>
+    /// <returns></returns>
     private IEnumerator ResumeAfterDelay(float delay)
     {
-        yield return new WaitForSecondsRealtime(delay);
+        yield return new WaitForSecondsRealtime(delay); //he method takes a single parameter, delay, which is a float
         if (isPopupActive)
         {
             ResumeGame();
         }
     }
-
+    /// <summary>
+    /// Deactivates all popup canvases
+    /// </summary>
     private void DeactivateAllPopups()
     {
         foreach (GameObject popupCanvas in popupCanvases)
@@ -109,5 +148,25 @@ public class GameManager : MonoBehaviour
             popupCanvas.SetActive(false);
         }
     }
-}
 
+    //Manage key and crystal counts
+    public void AddKey()
+    {
+        keyCount++;
+    }
+
+    public int GetKeyCount()
+    {
+        return keyCount;
+    }
+
+    public void AddCrystal()
+    {
+        crystalCount++;
+    }
+
+    public int GetCrystalCount()
+    {
+        return crystalCount;
+    }
+}
