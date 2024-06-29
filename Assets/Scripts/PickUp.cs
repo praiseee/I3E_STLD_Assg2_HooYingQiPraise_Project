@@ -15,7 +15,19 @@ public class Pickup : MonoBehaviour
     public PickupType pickupType;
 
     //Tracks whether the player is within the trigger area
-    private bool isInRange = false; 
+    private bool isInRange = false;
+
+    [SerializeField]
+    private AudioClip pickupSound;
+    private AudioSource audioSource;
+
+    /// <summary>
+    /// Initializes the AudioSource component
+    /// </summary>
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     /// <summary>
     /// To detect when the player enters trigger zone
@@ -51,6 +63,7 @@ public class Pickup : MonoBehaviour
             Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
             if (player != null)
             {
+                PlayPickupSound();
                 if (pickupType == PickupType.Medkit)
                 {
                     player.AddMedkit();
@@ -61,6 +74,17 @@ public class Pickup : MonoBehaviour
                 }
                 Destroy(gameObject);
             }
+        }
+    }
+
+    /// <summary>
+    /// Plays the pickup sound.
+    /// </summary>
+    void PlayPickupSound()
+    {
+        if (pickupSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(pickupSound);
         }
     }
 }
